@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/index/index.css">
+    <link rel="stylesheet" href="/Static/assets/css/index/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>Home</title>
+    <title>New Announcement</title>
 </head>
-
-<body>
+<body >
     <nav>
         <div class="logo-container">
             <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
@@ -97,22 +95,40 @@
 
 
 
-  <section class="main-page">
-       <p>Καλωσόρισμα και εισαγωγικό κείμενο που θα περιγράφει τους στόχους (π.χ ιστοχώρος για
-        εκμάθηση HΤΜL) και τις επιμέρους ιστοσελίδες του site (δηλ. τι περιέχεται στις ιστοσελίδες:
-        Ανακοινώσεις, Επικοινωνία, Έγραφα μαθήματος, Εργασίες). Στην ενότητα Ανακοινώσεις θα βρείτε ανακοινώσεις που αφορούν είτε εργασίες,
-        είτε υλικό για το μάθημα.
-        
-        Στην ενότητα Επικοινωνία σας παρέχεται η δυνατότητα για επικοινωνία με τον
-        καθηγητή του μαθήματος με αποστολή e-mail μέσω web φόρμας ή αποστολή e-mail
-        μέ χρήση e-mail διεύθυνσης.
-        
-        Στην ενότητα Έγραφα μαθήματος βρίσκονται πληροφορίες που αφορούν την ύλη του
-        μαθήματος τις οποίες μπορείτε και να κατεβάσετε.
-        
-        Στην ενότητα Εργασίες περιλαμβάνονται διαφορες πληροφορίες σχετικά με εργασίες που αφορούν το μάθημα μαζί με τις εκφωνήσεις των εργασιών τις οποίες μπορείτε
-        και να κατεβάσετε.</p>
+  <section class="insert-announcement-page">
+     
+              <h3>Send Email via web form</h3>
+              <form class="contact-form-container" action="https://formsubmit.co//info@achillionsecurity.gr" method="POST">
+              
+                    <div class="form-attribute form-fname"> 
+                        <input class="form-input" type="text" id="fname" name="sender" placeholder="Sender">
+                    </div>
+                 
+                     <div class="form-attribute form-lname"> 
+                         <input class="form-input" type="text" id="lname" name="subject" placeholder="Subject">
+                     </div>
+                 
+             
+                 
+               
+                        
+                 <div class="form-attribute form-subject">
+                    <textarea rows="5" class="form-input-subject" id="subject" name="subject" placeholder="Content.." style="height:200px"></textarea></div>
+                    <input type="hidden" name="_next" value="http://127.0.0.1:5501/html/thank_you.html">
+               <div class="form-submit"> 
+                   <input class="input-submit" type="submit"  value="Send email" name="sendEmail" >
+                </div>
+         
+                
+                
+                
+               
+                
+               
+            </form>
+         
+    
+   
   </section>
 </body>
-
 </html>
