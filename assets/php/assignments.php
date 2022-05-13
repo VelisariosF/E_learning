@@ -1,3 +1,21 @@
+<?php
+require('server.php');
+//if the user is not logged in redirect to the login page 
+if (!isset($_SESSION['logged_in'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+}
+//if is logggeout redirect the login page
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['loginame']);
+    header("location: login.php");
+}
+
+//get the data in order to show them to the screen
+$query = 'SELECT * from homework';
+$result = $db->query($query) or die(mysqli_error($db));
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,15 +33,12 @@
 <body>
     <nav>
         <div class="logo-container">
-            <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999"
-                style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+            <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
                 <circle style="fill:#59D8FF;" cx="256" cy="307.306" r="196.676" />
                 <path style="fill:#00C3F0;" d="M187.59,264.55c0-62.268,28.971-117.739,74.132-153.776c-1.906-0.055-3.804-0.144-5.723-0.144
                 c-108.622,0-196.676,88.054-196.676,196.676c0,108.621,88.054,196.676,196.676,196.676c46.353,0,88.927-16.075,122.544-42.9
                 C272.576,458.047,187.59,371.253,187.59,264.55z" />
-                <path style="fill:#5B5D6E;"
-                    d="M354.338,42.22H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178l77.069,17.785
+                <path style="fill:#5B5D6E;" d="M354.338,42.22H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178l77.069,17.785
                 c7.592,1.752,15.482,1.752,23.074,0l77.069-17.785c12.815-2.958,21.318-15.128,19.687-28.178L354.338,42.22z" />
                 <path style="fill:#464655;" d="M361.559,99.989l-7.221-57.768H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178
                 l77.07,17.785c3.796,0.875,7.666,1.314,11.537,1.314v-49.958L361.559,99.989z" />
@@ -89,13 +104,18 @@
         </div>
 
         <ul class="menu-container">
-            <li class="menu-item"><a href="#">Home</a></li>
-            <li class="menu-item"><a href="#">Announcements</a></li>
-            <li class="menu-item"><a href="#">Contact</a></li>
-            <li class="menu-item"><a href="#">Documents</a></li>
-            <li class="menu-item"><a href="#">Assignments</a></li>
-            <li class="menu-item"><a href="#">User Management</a></li>
-            <li class="menu-item"><a href="#">Log out</a></li>
+            <li class="menu-item"><a href="../../index.php">Home</a></li>
+            <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
+            <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
+            <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
+            <li class="menu-item"><a href="../php/assignments.php">Assignments</a></li>
+            <?php
+            //if the user is type tutor show additional choices
+            if ($_SESSION['role'] == 'Tutor') {
+                echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
+            }
+            ?>
+            <li class="menu-item"><a href="../php/Login.php">Log out</a></li>
         </ul>
     </nav>
 
@@ -104,12 +124,62 @@
     <section class="assignment-page">
         <ul class="assignments-container">
 
-            <div class="row">
+            <?php
+            //parse the data and show them on screen
+            if ($result && $result->num_rows > 0) {
+                $i = 0;
+
+                while ($row = $result->fetch_assoc()) {
+                    $i++;
+
+
+                    echo '<div class="row">
+
+                        <li class="assignment-element">
+                            <h3 class="title">
+                            Assignment ' . $row['id'];
+                    //if the user is type tutor show additional choices 
+                    if ($_SESSION['role'] == 'Tutor') {
+                        echo '
+                        
+                            <a href="../php/updateAssignment.php?&id=' . $row['id'] . '&goals=' . $row['goals'] . '&path=' . $row['path'] . '&homeworkToDeliver=' . $row['homeworkToDeliver'] . '&deliveryDate=' . $row['deliveryDate'] .  '"">Edit</a>
+                            <a href="../php/deleteAssignment.php?&id=' . $row['id'] . '" target="_self">Delete</a> ';
+                    }
+                    echo ' </h3>
+                        <ul class="assignment-element-list">
+    
+                            <li class="list-element"> <span>Goals</span>: The goals are
+                                <ol>
+                                    <li>' . $row['goals'] . '</li>
+                                </ol>
+                            </li>
+    
+                            <li class="list-element"><span>Outline</span>: Download the outline from <a href="#">here</a>.</li>
+    
+                            <li class="list-element"> <span>Deliverables</span>:
+                                <ol>
+                                    <li>' . $row['homeworkToDeliver'] . '</li>
+                                   
+                                </ol>
+                            </li>
+                            <li class="list-element"><span>Date to be delivered</span' . $row['deliveryDate'] .  '</li>
+    
+                        </ul>
+    
+                    </li>
+    
+               
+    
+                </div>';
+                }
+            }
+            ?>
+            <!-- <div class="row">
 
                 <li class="assignment-element">
                     <h3 class="title">
                         Assignment name
-
+     
                         <a href="#">Edit</a>
                         <a href="#">Delete</a>
                     </h3>
@@ -131,108 +201,15 @@
                             </ol>
                         </li>
                         <li class="list-element"><span>Date to be delivered</span>:12/1/2010</li>
-                        
+
                     </ul>
 
                 </li>
 
-                <li class="assignment-element">
-                    <h3 class="title">
-                        Assignment name
-
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </h3>
-                    <ul class="assignment-element-list">
-
-                        <li class="list-element"> <span>Goals</span>: The goals are
-                            <ol>
-                                <li>swiidjji</li>
-                                <li>diwjidj</li>
-                            </ol>
-                        </li>
-
-                        <li class="list-element"><span>Outline</span>: Download the outline from <a href="#">here</a>.</li>
-
-                        <li class="list-element"> <span>Deliverables</span>:
-                            <ol>
-                                <li>swiidjji</li>
-                                <li>diwjidj</li>
-                            </ol>
-                        </li>
-                        <li class="list-element"><span>Date to be delivered</span>:12/1/2010</li>
-                        
-                    </ul>
-
-                </li>
+           
 
             </div>
-
-            <div class="row">
-
-                <li class="assignment-element">
-                    <h3 class="title">
-                        Assignment name
-
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </h3>
-                    <ul class="assignment-element-list">
-
-                        <li class="list-element"> <span>Goals</span>: The goals are
-                            <ol>
-                                <li>Goal</li>
-                                <li>Goal</li>
-                            </ol>
-                        </li>
-
-                        <li class="list-element"><span>Outline</span>: Download the outline from <a href="#">here</a>.</li>
-
-                        <li class="list-element"> <span>Deliverables</span>:
-                            <ol>
-                                <li>Goal</li>
-                                <li>Goal</li>
-                            </ol>
-                        </li>
-                        <li class="list-element"><span>Date to be delivered</span>:12/1/2010</li>
-                        
-                    </ul>
-
-                </li>
-
-                <li class="assignment-element">
-                    <h3 class="title">
-                        Assignment name
-
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </h3>
-                    <ul class="assignment-element-list">
-
-                        <li class="list-element"> <span>Goals</span>: The goals are
-                            <ol>
-                                <li>swiidjji</li>
-                                <li>diwjidj</li>
-                            </ol>
-                        </li>
-
-                        <li class="list-element"><span>Outline</span>: Download the outline from <a href="#">here</a>.</li>
-
-                        <li class="list-element"> <span>Deliverables</span>:
-                            <ol>
-                                <li>swiidjji</li>
-                                <li>diwjidj</li>
-                            </ol>
-                        </li>
-                        <li class="list-element"><span>Date to be delivered</span>:12/1/2010</li>
-                        
-                    </ul>
-
-                </li>
-
-            </div>
-
-
+            -->
 
 
 
@@ -244,21 +221,27 @@
 
 
     </section>
-    <svg class="new" id="SvgjsSvg1001" xmlns="http://www.w3.org/2000/svg" version="1.1"
-        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
-        <defs id="SvgjsDefs1002"></defs>
-        <g id="SvgjsG1008">
-            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 50 50" viewBox="0 0 50 50">
-                <circle cx="25" cy="25" r="25" fill="#00c3f0" class="color43b05c svgShape"></circle>
-                <line x1="25" x2="25" y1="13" y2="38" fill="none" stroke="#fff" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke">
-                </line>
-                <line x1="37.5" x2="12.5" y1="25" y2="25" fill="none" stroke="#fff" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke">
-                </line>
-            </svg>
-        </g>
-    </svg>
+    <?php
+    //if the user is type tutor show additional choices
+    if ($_SESSION['role'] == 'Tutor') {
+        echo '  <svg onclick="addNewAssignment()" class="new" id="SvgjsSvg1001"  xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
+                        <defs id="SvgjsDefs1002"></defs>
+                        <g id="SvgjsG1008">
+                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 50 50" viewBox="0 0 50 50" >
+                                <circle cx="25" cy="25" r="25" fill="#00c3f0" class="color43b05c svgShape"></circle>
+                                <line x1="25" x2="25" y1="13" y2="38" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
+                                <line x1="37.5" x2="12.5" y1="25" y2="25" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
+                            </svg>
+                        </g>
+                    </svg>';
+    }
+    ?>
+
+    <script>
+        function addNewAssignment() {
+            window.location.href = 'insertNewAssignment.php';
+        }
+    </script>
 </body>
 
 </html>

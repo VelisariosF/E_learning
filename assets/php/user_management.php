@@ -84,13 +84,18 @@
         </div>
 
         <ul class="menu-container">
-            <li class="menu-item"><a href="#">Home</a></li>
-            <li class="menu-item"><a href="#">Announcements</a></li>
-            <li class="menu-item"><a href="#">Contact</a></li>
-            <li class="menu-item"><a href="#">Documents</a></li>
-            <li class="menu-item"><a href="#">Assignments</a></li>
-            <li class="menu-item"><a href="#">User Management</a></li>
-            <li class="menu-item"><a href="#">Log out</a></li>
+            <li class="menu-item"><a href="../../index.php">Home</a></li>
+            <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
+            <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
+            <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
+            <li class="menu-item"><a href="../php/assignments.php">Assignments</a></li>
+            <?php
+     //if the user is type tutor show additional choices
+                if ($_SESSION['role'] == 'Tutor') {
+                    echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
+                }
+                ?>
+            <li class="menu-item"><a href="../php/Login.php">Log out</a></li>
         </ul>
     </nav>
 

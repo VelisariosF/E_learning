@@ -19,6 +19,11 @@
         <h1 class="title">Welcome, register to continue</h1>
 
         <form class="register-form" action="/home.php" method="POST">
+            
+        <input class="user-input" type="email" placeholder="Firstname.." name="firstname" required />
+
+        <input class="user-input" type="email" placeholder="Lastname.." name="lastname" required />
+
          
             <input class="user-input" type="email" placeholder="email.." name="loginame" required />
 
@@ -27,7 +32,7 @@
             <input class="user-input" type="password" placeholder="password.." name="password" required />
 
 
-            <input class="user-submit" type="submit" placeholder="register" name="register_user" value="Register" />
+            <input class="user-submit" type="submit" placeholder="register" name="insertUser" value="Register" />
         </form>
 
         <a href="../../assets/php/Login.php">Already have an account!</a>

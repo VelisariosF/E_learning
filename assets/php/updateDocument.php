@@ -1,40 +1,34 @@
 <?php
 require('server.php');
 
-//if the user is not logged in redirect to the login page
+ //if the user is not logged in redirect to the login page
 if (!isset($_SESSION['logged_in'])) {
-    $_SESSION['msg'] = "You must log in first";
-    header('location: login.php');
+  $_SESSION['msg'] = "You must log in first";
+     header('location: login.php');
 }
 
-//if is logggeout redirect the login page
-if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['loginame']);
-    header("location: login.php");
-}
-
-//get the data in order to show them to the screen
-$query = 'SELECT * from announcements';
-$result = $db->query($query) or die(mysqli_error($db));
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../assets/css/index/index.css">
+     <link rel="stylesheet" href="../../assets/css/index/index.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>Announcements</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Update Document</title>
 </head>
+<body >
 
-<body>
+ 
+<?php include('errors.php');
+
+
+ $_SESSION['updateDocId'] = $_GET['id'];
+ 
+?>
     <nav>
         <div class="logo-container">
             <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
@@ -104,7 +98,7 @@ $result = $db->query($query) or die(mysqli_error($db));
                 <g></g>
                 <g></g>
             </svg>
-            <h1><a href="#">E-Learning</a></h1>
+<h1><a href="#">E-Learning</a></h1>
         </div>
 
         <ul class="menu-container">
@@ -114,119 +108,51 @@ $result = $db->query($query) or die(mysqli_error($db));
             <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
             <li class="menu-item"><a href="../php/assignments.php">Assignments</a></li>
             <?php
-            //if the user is type tutor show additional choices
-            if ($_SESSION['role'] == 'Tutor') {
-                echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
-            }
-            ?>
+     //if the user is type tutor show additional choices
+                if ($_SESSION['role'] == 'Tutor') {
+                    echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
+                }
+                ?>
             <li class="menu-item"><a href="../php/Login.php">Log out</a></li>
         </ul>
     </nav>
 
 
 
-    <section class="announcement-page">
-        <ul class="announcements-container">
-
-            <?php
-            //parse the data and show them on screen
-            if ($result && $result->num_rows > 0) {
-                $i = 0;
-
-                while ($row = $result->fetch_assoc()) {
-                    $i++;
-
-
-                    echo '<div class="row"> 
-
-                        <li class="announcement-element">
-                            <h3 class="title">
-                                Announcement ' . $row['id'];
-                    //if the user is type tutor show additional choices
-                    if ($_SESSION['role'] == 'Tutor') {
-                        echo '
+  <section class="insert-announcement-page">
+     
+              <h3 class="title">Update document</h3>
+              <form class="contact-form-container" action="../php/documents.php" method="POST">
+              
+                    <div class="form-attribute form-fname"> 
+                        <input class="form-input" type="text" id="fname" name="documentTitle" value="<?php echo $_GET['documentTitle'];?>" required>
+                    </div>
+                 
+                     <div class="form-attribute form-lname"> 
+                         <input class="form-input" type="text" id="lname" name="documentPath" value="<?php echo $_GET['documentPath'];?>" required>
+                     </div>
+                 
+             
+                 
+               
                         
-                            <a href="../php/updateAnnouncement.php?&id=' . $row['id'] . '&date=' . $row['date'] . '&topic=' . $row['topic'] . '&mainContent=' . $row['mainContent'] . '">Edit</a>
-                            <a href="../php/deleteAnnouncement.php?&id=' . $row['id'] . '" target="_self">Delete</a> ';
-                    }
-                    echo '</h3>
-                        <ul class="announcement-element-list">
-                        <li  class="list-element">' . $row['date'] . '</li>
-                        <li  class="list-element">Subject: ' . $row['topic'] . '</li>
-                        <li  class="list-element">' . $row['mainContent'] . '</li>
-                       </ul>
-        
-                  </li>
-                  </div>';
-                }
-            }
-            ?>
-            <!-- <div class="row">
-
-            <li class="announcement-element">
-                <h3 class="title">
-                    Announcement
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                  <li  class="list-element">Date</li>
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <li  class="list-element">texqsvfwyebgygwhuiehfgwuh</li>
-              </ul>
-  
-            </li>
-  
-            <li class="announcement-element">
-              <h3 class="title">
-                  Announcement
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
-              </h3>
-            <ul class="announcement-element-list">
-                <li  class="list-element">Date</li>
-                <li  class="list-element">Subject: Buila a website</li>
-                <li  class="list-element">texqsvfwyebgygwhuiehfgwuh</li>
-            </ul>
-  
-          </li>
-        </div>-->
-
-
-
-
-
-
-
-        </ul>
-
-
-
-
-    </section>
-    <?php
-    //if the user is type tutor show additional choices
-    if ($_SESSION['role'] == 'Tutor') {
-        echo '  <svg onclick="addNewAnnouncement()" class="new" id="SvgjsSvg1001"  xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
-                        <defs id="SvgjsDefs1002"></defs>
-                        <g id="SvgjsG1008">
-                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 50 50" viewBox="0 0 50 50" >
-                                <circle cx="25" cy="25" r="25" fill="#00c3f0" class="color43b05c svgShape"></circle>
-                                <line x1="25" x2="25" y1="13" y2="38" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
-                                <line x1="37.5" x2="12.5" y1="25" y2="25" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
-                            </svg>
-                        </g>
-                    </svg>';
-    }
-    ?>
-
-
-    <script>
-        function addNewAnnouncement() {
-            window.location.href = 'insertNewAnnouncement.php';
-        }
-    </script>
+                 <div class="form-attribute form-subject">
+                    <textarea rows="5" class="form-input-subject" id="subject" name="description" value="<?php echo $_GET['description'];?>"  style="height:200px" required></textarea></div>
+                  
+               <div class="form-submit"> 
+                   <input class="input-submit" type="submit"  value="Post" name="updateDocument" >
+                </div>
+         
+                
+                
+                
+               
+                
+               
+            </form>
+         
+    
+   
+  </section>
 </body>
-
 </html>

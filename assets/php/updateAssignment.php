@@ -1,25 +1,13 @@
 <?php
 require('server.php');
 
-//if the user is not logged in redirect to the login page
+ //if the user is not logged in redirect to the login page
 if (!isset($_SESSION['logged_in'])) {
-    $_SESSION['msg'] = "You must log in first";
-    header('location: login.php');
+  $_SESSION['msg'] = "You must log in first";
+     header('location: login.php');
 }
 
-//if is logggeout redirect the login page
-if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['loginame']);
-    header("location: login.php");
-}
-
-//get the data in order to show them to the screen
-$query = 'SELECT * from announcements';
-$result = $db->query($query) or die(mysqli_error($db));
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,18 +19,29 @@ $result = $db->query($query) or die(mysqli_error($db));
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>Announcements</title>
+    <title>Update Assignment</title>
 </head>
 
 <body>
+    
+
+<?php include('errors.php');
+
+
+$_SESSION['updateHomId'] = $_GET['id'];
+
+?>
     <nav>
         <div class="logo-container">
-            <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+            <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999"
+                style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
                 <circle style="fill:#59D8FF;" cx="256" cy="307.306" r="196.676" />
                 <path style="fill:#00C3F0;" d="M187.59,264.55c0-62.268,28.971-117.739,74.132-153.776c-1.906-0.055-3.804-0.144-5.723-0.144
                 c-108.622,0-196.676,88.054-196.676,196.676c0,108.621,88.054,196.676,196.676,196.676c46.353,0,88.927-16.075,122.544-42.9
                 C272.576,458.047,187.59,371.253,187.59,264.55z" />
-                <path style="fill:#5B5D6E;" d="M354.338,42.22H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178l77.069,17.785
+                <path style="fill:#5B5D6E;"
+                    d="M354.338,42.22H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178l77.069,17.785
                 c7.592,1.752,15.482,1.752,23.074,0l77.069-17.785c12.815-2.958,21.318-15.128,19.687-28.178L354.338,42.22z" />
                 <path style="fill:#464655;" d="M361.559,99.989l-7.221-57.768H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178
                 l77.07,17.785c3.796,0.875,7.666,1.314,11.537,1.314v-49.958L361.559,99.989z" />
@@ -114,84 +113,43 @@ $result = $db->query($query) or die(mysqli_error($db));
             <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
             <li class="menu-item"><a href="../php/assignments.php">Assignments</a></li>
             <?php
-            //if the user is type tutor show additional choices
-            if ($_SESSION['role'] == 'Tutor') {
-                echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
-            }
-            ?>
+     //if the user is type tutor show additional choices
+                if ($_SESSION['role'] == 'Tutor') {
+                    echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
+                }
+                ?>
             <li class="menu-item"><a href="../php/Login.php">Log out</a></li>
         </ul>
     </nav>
 
 
 
-    <section class="announcement-page">
-        <ul class="announcements-container">
+    <section class="insert-announcement-page">
 
-            <?php
-            //parse the data and show them on screen
-            if ($result && $result->num_rows > 0) {
-                $i = 0;
+        <h3 class="title">Update  assignment</h3>
+        <form class="contact-form-container" action="../php/assignments.php" method="POST">
 
-                while ($row = $result->fetch_assoc()) {
-                    $i++;
+            <div class="form-attribute form-fname">
+                <input class="form-input" type="text" id="fname" name="goals" value="<?php echo $_GET['goals'];?>"required>
+            </div>
 
+            <div class="form-attribute form-lname">
+                <input class="form-input" type="text" id="lname" name="homeworkToDeliver" value="<?php echo $_GET['homeworkToDeliver'];?>" required>
+            </div> 
+            
 
-                    echo '<div class="row"> 
+            <div class="form-attribute form-lname">
+                <input class="form-input" type="text" id="lname" name="path" value="<?php echo $_GET['path'];?>" required>
+            </div>
 
-                        <li class="announcement-element">
-                            <h3 class="title">
-                                Announcement ' . $row['id'];
-                    //if the user is type tutor show additional choices
-                    if ($_SESSION['role'] == 'Tutor') {
-                        echo '
-                        
-                            <a href="../php/updateAnnouncement.php?&id=' . $row['id'] . '&date=' . $row['date'] . '&topic=' . $row['topic'] . '&mainContent=' . $row['mainContent'] . '">Edit</a>
-                            <a href="../php/deleteAnnouncement.php?&id=' . $row['id'] . '" target="_self">Delete</a> ';
-                    }
-                    echo '</h3>
-                        <ul class="announcement-element-list">
-                        <li  class="list-element">' . $row['date'] . '</li>
-                        <li  class="list-element">Subject: ' . $row['topic'] . '</li>
-                        <li  class="list-element">' . $row['mainContent'] . '</li>
-                       </ul>
-        
-                  </li>
-                  </div>';
-                }
-            }
-            ?>
-            <!-- <div class="row">
+         
+            <div class="form-attribute form-lname">
+                <input class="form-input" type="date" id="lname" name="deliveryDate"  value="<?php echo $_GET['deliveryDate']?>" required>
+            </div>
 
-            <li class="announcement-element">
-                <h3 class="title">
-                    Announcement
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                  <li  class="list-element">Date</li>
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <li  class="list-element">texqsvfwyebgygwhuiehfgwuh</li>
-              </ul>
-  
-            </li>
-  
-            <li class="announcement-element">
-              <h3 class="title">
-                  Announcement
-                  <a href="#">Edit</a>
-                  <a href="#">Delete</a>
-              </h3>
-            <ul class="announcement-element-list">
-                <li  class="list-element">Date</li>
-                <li  class="list-element">Subject: Buila a website</li>
-                <li  class="list-element">texqsvfwyebgygwhuiehfgwuh</li>
-            </ul>
-  
-          </li>
-        </div>-->
+            <div class="form-submit">
+                <input class="input-submit" type="submit" value="Post" name="updateHomework">
+            </div>
 
 
 
@@ -199,34 +157,11 @@ $result = $db->query($query) or die(mysqli_error($db));
 
 
 
-        </ul>
-
+        </form>
 
 
 
     </section>
-    <?php
-    //if the user is type tutor show additional choices
-    if ($_SESSION['role'] == 'Tutor') {
-        echo '  <svg onclick="addNewAnnouncement()" class="new" id="SvgjsSvg1001"  xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
-                        <defs id="SvgjsDefs1002"></defs>
-                        <g id="SvgjsG1008">
-                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 50 50" viewBox="0 0 50 50" >
-                                <circle cx="25" cy="25" r="25" fill="#00c3f0" class="color43b05c svgShape"></circle>
-                                <line x1="25" x2="25" y1="13" y2="38" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
-                                <line x1="37.5" x2="12.5" y1="25" y2="25" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
-                            </svg>
-                        </g>
-                    </svg>';
-    }
-    ?>
-
-
-    <script>
-        function addNewAnnouncement() {
-            window.location.href = 'insertNewAnnouncement.php';
-        }
-    </script>
 </body>
 
 </html>

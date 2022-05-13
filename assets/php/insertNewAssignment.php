@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Static/assets/css/index/index.css">
+    <link rel="stylesheet" href="../../assets/css/index/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -89,12 +89,18 @@
         </div>
 
         <ul class="menu-container">
-            <li class="menu-item"><a href="#">Home</a></li>
-            <li class="menu-item"><a href="#">Announcements</a></li>
-            <li class="menu-item"><a href="#">Contact</a></li>
-            <li class="menu-item"><a href="#">Documents</a></li>
-            <li class="menu-item"><a href="#">Assignments</a></li>
-            <li class="menu-item"><a href="#">Log out</a></li>
+            <li class="menu-item"><a href="../../index.php">Home</a></li>
+            <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
+            <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
+            <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
+            <li class="menu-item"><a href="../php/assignments.php">Assignments</a></li>
+            <?php
+     //if the user is type tutor show additional choices
+                if ($_SESSION['role'] == 'Tutor') {
+                    echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
+                }
+                ?>
+            <li class="menu-item"><a href="../php/Login.php">Log out</a></li>
         </ul>
     </nav>
 
@@ -106,25 +112,25 @@
         <form class="contact-form-container" action="#" method="POST">
 
             <div class="form-attribute form-fname">
-                <input class="form-input" type="date" id="fname" name="date" placeholder="Title">
-            </div>
-
-
-
-            <div class="form-attribute form-lname">
-                <input class="form-input" type="text" id="lname" name="subject" placeholder="path or name of file..">
+                <input class="form-input" type="text" id="fname" name="goals" placeholder="Goals">
             </div>
 
             <div class="form-attribute form-lname">
-                <input class="form-input" type="text" id="lname" name="subject" placeholder="Deliverables..">
+                <input class="form-input" type="text" id="lname" name="homeworkToDeliver" placeholder="Deliverables..">
             </div> 
             
-            <div class="form-attribute form-subject">
-            <textarea rows="5" class="form-input-subject" id="subject" name="subject" placeholder="Content.."
-                style="height:200px"></textarea></div>
+
+            <div class="form-attribute form-lname">
+                <input class="form-input" type="text" id="lname" name="path" placeholder="path or name of file..">
+            </div>
+
+         
+            <div class="form-attribute form-lname">
+                <input class="form-input" type="date" id="lname" name="deliveryDate" placeholder="Delivery date..">
+            </div>
 
             <div class="form-submit">
-                <input class="input-submit" type="submit" value="Post" name="sendEmail">
+                <input class="input-submit" type="submit" value="Post" name="insertNewHomework">
             </div>
 
 

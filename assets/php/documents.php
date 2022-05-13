@@ -1,16 +1,36 @@
+<?php
+require('server.php');
+//if the user is not logged in redirect to the login page
+if (!isset($_SESSION['logged_in'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+}
+//if is logggeout redirect the login page
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['loginame']);
+    header("location: login.php");
+}
+
+//get the data in order to show them to the screen
+$query = 'SELECT * from documents';
+$result = $db->query($query) or die(mysqli_error($db));
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/css/index/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <title>Documents</title>
 </head>
-<body >
+
+<body>
     <nav>
         <div class="logo-container">
             <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
@@ -80,92 +100,65 @@
                 <g></g>
                 <g></g>
             </svg>
-<h1><a href="#">E-Learning</a></h1>
+            <h1><a href="#">E-Learning</a></h1>
         </div>
 
         <ul class="menu-container">
-            <li class="menu-item"><a href="#">Home</a></li>
-            <li class="menu-item"><a href="#">Announcements</a></li>
-            <li class="menu-item"><a href="#">Contact</a></li>
-            <li class="menu-item"><a href="#">Documents</a></li>
-            <li class="menu-item"><a href="#">Assignments</a></li>
-            <li class="menu-item"><a href="#">User Management</a></li>
-            <li class="menu-item"><a href="#">Log out</a></li>
+            <li class="menu-item"><a href="../../index.php">Home</a></li>
+            <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
+            <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
+            <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
+            <li class="menu-item"><a href="../php/assignments.php">Assignments</a></li>
+            <?php
+            //if the user is type tutor show additional choices
+            if ($_SESSION['role'] == 'Tutor') {
+                echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
+            }
+            ?>
+            <li class="menu-item"><a href="../php/Login.php">Log out</a></li>
         </ul>
     </nav>
 
 
 
-  <section class="announcement-page">
-      <ul class="announcements-container">
+    <section class="announcement-page">
+        <ul class="announcements-container">
+            <?php
+            //parse the data and show them on screen
+            if ($result && $result->num_rows > 0) {
+                $i = 0;
 
-        <div class="row">
+                while ($row = $result->fetch_assoc()) {
+                    $i++;
 
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
 
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-  
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
+                    echo '<div class="row">
 
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-        </div>
-
-        <div class="row">
-
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-  
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-        </div>
-
-        <div class="row">
+                        <li class="announcement-element">
+                            <h3 class="title">
+                                Document ' . $row['id'];
+                    //if the user is type tutor show additional choices
+                    if ($_SESSION['role'] == 'Tutor') {
+                        echo '
+                        
+                            <a href="../php/updateDocument.php?&id=' . $row['id'] . '&documentTitle=' . $row['documentTitle'] . '&description=' . $row['description'] . '&documentPath=' . $row['documentPath'] . '">Edit</a>
+                            <a href="../php/deleteDocument.php??id=' . $row['id'] . '" target="_self" >Delete</a> ';
+                    }
+                    echo ' </h3>
+                        <ul class="announcement-element-list">
+                          
+                            <li  class="list-element">Subject: ' . $row['description'] . '</li>
+                            <a href=""' . $row['documentPath'] . '"download>Download</a>
+                        </ul>
+            
+                      </li>
+            
+                   
+                  </div>';
+                }
+            }
+            ?>
+            <!--<div class="row">
 
             <li class="announcement-element">
                 <h3 class="title">
@@ -181,41 +174,43 @@
               </ul>
   
             </li>
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
   
-            </li>
-        </div>
+         
+        </div>-->
 
 
-     
 
 
-      </ul>
 
-        
 
-      
-  </section>
-  <svg  class="new" id="SvgjsSvg1001"  xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
-    <defs id="SvgjsDefs1002"></defs>
-    <g id="SvgjsG1008">
-        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 50 50" viewBox="0 0 50 50" >
-            <circle cx="25" cy="25" r="25" fill="#00c3f0" class="color43b05c svgShape"></circle>
-            <line x1="25" x2="25" y1="13" y2="38" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
-            <line x1="37.5" x2="12.5" y1="25" y2="25" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
-        </svg>
-    </g>
-</svg>
- </body>
+        </ul>
+
+
+
+
+    </section>
+    <?php
+    //if the user is type tutor show additional choices
+    if ($_SESSION['role'] == 'Tutor') {
+        echo '  <svg onclick="addNewDoc()" class="new" id="SvgjsSvg1001"  xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
+                        <defs id="SvgjsDefs1002"></defs>
+                        <g id="SvgjsG1008">
+                            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 50 50" viewBox="0 0 50 50" >
+                                <circle cx="25" cy="25" r="25" fill="#00c3f0" class="color43b05c svgShape"></circle>
+                                <line x1="25" x2="25" y1="13" y2="38" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
+                                <line x1="37.5" x2="12.5" y1="25" y2="25" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
+                            </svg>
+                        </g>
+                    </svg>';
+    }
+    ?>
+
+
+    <script>
+        function addNewDoc() {
+            window.location.href = 'insertNewDocument.php';
+        }
+    </script>
+</body>
+
 </html>

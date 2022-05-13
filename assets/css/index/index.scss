@@ -1,6 +1,4 @@
-*{
-  letter-spacing: .3em;
-}
+
 html {
     height: 100%;
     font-family: 'Roboto', sans-serif;
@@ -13,7 +11,7 @@ body{
     margin: 0%;
     padding: 0%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url("assets/images/Home.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url("../../../assets/images/Home.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -136,7 +134,7 @@ nav{
           margin-bottom: 8%;
           .announcement-element{
           
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+          //  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
             border-bottom: 0.5px solid rgb(156, 156, 156);
             padding-bottom: 3%;
             width: 40%;
@@ -369,7 +367,7 @@ width: 103%;
           margin-bottom: 8%;
           .assignment-element{
           
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+           // box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
             border-bottom: 0.5px solid rgb(156, 156, 156);
             padding-bottom: 3%;
             width: 40%;
@@ -460,7 +458,7 @@ width: 103%;
           margin-bottom: 8%;
           .user-management-element{
           
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+          //  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
             border-bottom: 0.5px solid rgb(156, 156, 156);
             padding-bottom: 3%;
             width: 40%;

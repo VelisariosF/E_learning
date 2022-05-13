@@ -1,3 +1,17 @@
+<?php 
+  session_start(); 
+   //if the user is not logged in redirect to the login page
+  if (!isset($_SESSION['logged_in'])) {
+    $_SESSION['msg'] = "You must log in first";
+   	header('location: Login.php');
+  }
+  //if is logggeout redirect the login page
+  if (isset($_GET['logout'])) {
+  	session_destroy();
+  	unset($_SESSION['loginame']);
+  	header("location: Login.php");
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +27,7 @@
 </head>
 
 <body>
-    <nav>
+    <nav >
         <div class="logo-container">
             <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
                 <circle style="fill:#59D8FF;" cx="256" cy="307.306" r="196.676" />
@@ -91,7 +105,13 @@
             <li class="menu-item"><a href="assets/php/contact.php">Contact</a></li>
             <li class="menu-item"><a href="assets/php/documents.php">Documents</a></li>
             <li class="menu-item"><a href="assets/php/assignments.php">Assignments</a></li>
-            <li class="menu-item"><a href="assets/php/user_management.php">User Management</a></li>
+            <?php
+     //if the user is type tutor show additional choices
+                if ($_SESSION['role'] == 'Tutor') {
+                    echo '<li class="menu-item"><a href="assets/php/user_management.php">User Management</a></li>';
+                }
+                ?>
+            
             <li class="menu-item"><a href="assets/php/Login.php">Log out</a></li>
         </ul>
     </nav>
@@ -99,20 +119,7 @@
 
 
   <section class="main-page">
-       <p>Καλωσόρισμα και εισαγωγικό κείμενο που θα περιγράφει τους στόχους (π.χ ιστοχώρος για
-        εκμάθηση HΤΜL) και τις επιμέρους ιστοσελίδες του site (δηλ. τι περιέχεται στις ιστοσελίδες:
-        Ανακοινώσεις, Επικοινωνία, Έγραφα μαθήματος, Εργασίες). Στην ενότητα Ανακοινώσεις θα βρείτε ανακοινώσεις που αφορούν είτε εργασίες,
-        είτε υλικό για το μάθημα.
-        
-        Στην ενότητα Επικοινωνία σας παρέχεται η δυνατότητα για επικοινωνία με τον
-        καθηγητή του μαθήματος με αποστολή e-mail μέσω web φόρμας ή αποστολή e-mail
-        μέ χρήση e-mail διεύθυνσης.
-        
-        Στην ενότητα Έγραφα μαθήματος βρίσκονται πληροφορίες που αφορούν την ύλη του
-        μαθήματος τις οποίες μπορείτε και να κατεβάσετε.
-        
-        Στην ενότητα Εργασίες περιλαμβάνονται διαφορες πληροφορίες σχετικά με εργασίες που αφορούν το μάθημα μαζί με τις εκφωνήσεις των εργασιών τις οποίες μπορείτε
-        και να κατεβάσετε.</p>
+       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo amet maiores tenetur nulla voluptate, fugiat voluptatem est enim veniam, perferendis ratione vitae debitis officia itaque molestias magnam ducimus pariatur esse ipsam quos? Consequuntur, dolorem esse quibusdam doloribus aut repudiandae minus!</p>
   </section>
 </body>
 
