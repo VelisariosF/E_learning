@@ -96,7 +96,7 @@ $_SESSION['updateAnnouncementId'] = $_GET['id'];
                 <g></g>
                 <g></g>
             </svg>
-<h1><a href="#">E-Learning</a></h1>
+<h1><a href="../php/home.php">E-Learning</a></h1>
         </div>
 
         <ul class="menu-container">

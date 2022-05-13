@@ -97,7 +97,7 @@ if (!isset($_SESSION['logged_in'])) {
                 <g></g>
                 <g></g>
             </svg>
-<h1><a href="#">E-Learning</a></h1>
+<h1><a href="../php/home.php">E-Learning</a></h1>
         </div>
 
         <ul class="menu-container">
