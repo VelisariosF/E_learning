@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/index/index.css">
+    <link rel="stylesheet" href="/Static/assets/css/index/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>User Management</title>
+    <title>New Document</title>
 </head>
 <body >
     <nav>
@@ -89,75 +89,46 @@
             <li class="menu-item"><a href="#">Contact</a></li>
             <li class="menu-item"><a href="#">Documents</a></li>
             <li class="menu-item"><a href="#">Assignments</a></li>
-            <li class="menu-item"><a href="#">User Management</a></li>
             <li class="menu-item"><a href="#">Log out</a></li>
         </ul>
     </nav>
 
 
 
-  <section class="user-management-page">
-      <ul class="user-management-container">
-
-        <div class="row">
-
-            <li class="user-management-element">
-                <h3 class="title">
-                    user name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-  
-            </li>
-  
-            <li class="user-management-element">
-                <h3 class="title">
-                    user name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-  
-            </li>
-        </div>
-
-        <div class="row">
-
-            <li class="user-management-element">
-                <h3 class="title">
-                    user name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-  
-            </li>
-  
-            <li class="user-management-element">
-                <h3 class="title">
-                    user name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-  
-            </li>
-        </div>
-
-        
-
-
+  <section class="insert-announcement-page">
      
-
-
-      </ul>
-
-        
-
-      
+              <h3 class="title">Post new document</h3>
+              <form class="contact-form-container" action="#" method="POST">
+              
+                    <div class="form-attribute form-fname"> 
+                        <input class="form-input" type="date" id="fname" name="date" placeholder="Title">
+                    </div>
+                 
+                     <div class="form-attribute form-lname"> 
+                         <input class="form-input" type="text" id="lname" name="subject" placeholder="path or name of file..">
+                     </div>
+                 
+             
+                 
+               
+                        
+                 <div class="form-attribute form-subject">
+                    <textarea rows="5" class="form-input-subject" id="subject" name="subject" placeholder="Content.." style="height:200px"></textarea></div>
+                  
+               <div class="form-submit"> 
+                   <input class="input-submit" type="submit"  value="Post" name="sendEmail" >
+                </div>
+         
+                
+                
+                
+               
+                
+               
+            </form>
+         
+    
+   
   </section>
-
-
 </body>
 </html>

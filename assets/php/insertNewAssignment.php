@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Static/assets/css/index/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>New Announcement</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>New Assignment</title>
 </head>
-<body >
+
+<body>
     <nav>
         <div class="logo-container">
-            <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
+            <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999"
+                style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
                 <circle style="fill:#59D8FF;" cx="256" cy="307.306" r="196.676" />
                 <path style="fill:#00C3F0;" d="M187.59,264.55c0-62.268,28.971-117.739,74.132-153.776c-1.906-0.055-3.804-0.144-5.723-0.144
                 c-108.622,0-196.676,88.054-196.676,196.676c0,108.621,88.054,196.676,196.676,196.676c46.353,0,88.927-16.075,122.544-42.9
                 C272.576,458.047,187.59,371.253,187.59,264.55z" />
-                <path style="fill:#5B5D6E;" d="M354.338,42.22H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178l77.069,17.785
+                <path style="fill:#5B5D6E;"
+                    d="M354.338,42.22H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178l77.069,17.785
                 c7.592,1.752,15.482,1.752,23.074,0l77.069-17.785c12.815-2.958,21.318-15.128,19.687-28.178L354.338,42.22z" />
                 <path style="fill:#464655;" d="M361.559,99.989l-7.221-57.768H157.661l-9.955,79.641c-1.631,13.05,6.872,25.222,19.687,28.178
                 l77.07,17.785c3.796,0.875,7.666,1.314,11.537,1.314v-49.958L361.559,99.989z" />
@@ -80,7 +85,7 @@
                 <g></g>
                 <g></g>
             </svg>
-<h1><a href="#">E-Learning</a></h1>
+            <h1><a href="#">E-Learning</a></h1>
         </div>
 
         <ul class="menu-container">
@@ -95,40 +100,44 @@
 
 
 
-  <section class="insert-announcement-page">
-     
-              <h3>Send Email via web form</h3>
-              <form class="contact-form-container" action="https://formsubmit.co//info@achillionsecurity.gr" method="POST">
-              
-                    <div class="form-attribute form-fname"> 
-                        <input class="form-input" type="text" id="fname" name="sender" placeholder="Sender">
-                    </div>
-                 
-                     <div class="form-attribute form-lname"> 
-                         <input class="form-input" type="text" id="lname" name="subject" placeholder="Subject">
-                     </div>
-                 
-             
-                 
-               
-                        
-                 <div class="form-attribute form-subject">
-                    <textarea rows="5" class="form-input-subject" id="subject" name="subject" placeholder="Content.." style="height:200px"></textarea></div>
-                    <input type="hidden" name="_next" value="http://127.0.0.1:5501/html/thank_you.html">
-               <div class="form-submit"> 
-                   <input class="input-submit" type="submit"  value="Send email" name="sendEmail" >
-                </div>
-         
-                
-                
-                
-               
-                
-               
-            </form>
-         
-    
-   
-  </section>
+    <section class="insert-announcement-page">
+
+        <h3 class="title">Post new assignment</h3>
+        <form class="contact-form-container" action="#" method="POST">
+
+            <div class="form-attribute form-fname">
+                <input class="form-input" type="date" id="fname" name="date" placeholder="Title">
+            </div>
+
+
+
+            <div class="form-attribute form-lname">
+                <input class="form-input" type="text" id="lname" name="subject" placeholder="path or name of file..">
+            </div>
+
+            <div class="form-attribute form-lname">
+                <input class="form-input" type="text" id="lname" name="subject" placeholder="Deliverables..">
+            </div> 
+            
+            <div class="form-attribute form-subject">
+            <textarea rows="5" class="form-input-subject" id="subject" name="subject" placeholder="Content.."
+                style="height:200px"></textarea></div>
+
+            <div class="form-submit">
+                <input class="input-submit" type="submit" value="Post" name="sendEmail">
+            </div>
+
+
+
+
+
+
+
+        </form>
+
+
+
+    </section>
 </body>
+
 </html>

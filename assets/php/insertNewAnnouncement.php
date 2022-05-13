@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/index/index.css">
+    <link rel="stylesheet" href="/Static/assets/css/index/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>Documents</title>
+    <title>New Announcement</title>
 </head>
 <body >
     <nav>
@@ -89,133 +89,46 @@
             <li class="menu-item"><a href="#">Contact</a></li>
             <li class="menu-item"><a href="#">Documents</a></li>
             <li class="menu-item"><a href="#">Assignments</a></li>
-            <li class="menu-item"><a href="#">User Management</a></li>
             <li class="menu-item"><a href="#">Log out</a></li>
         </ul>
     </nav>
 
 
 
-  <section class="announcement-page">
-      <ul class="announcements-container">
-
-        <div class="row">
-
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-  
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-        </div>
-
-        <div class="row">
-
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-  
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-        </div>
-
-        <div class="row">
-
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-            <li class="announcement-element">
-                <h3 class="title">
-                    Document name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-              <ul class="announcement-element-list">
-                
-                  <li  class="list-element">Subject: Buila a website</li>
-                  <a href="#">Download</a>
-              </ul>
-  
-            </li>
-        </div>
-
-
+  <section class="insert-announcement-page">
      
-
-
-      </ul>
-
-        
-
-      
+              <h3 class="title">Post new announcement</h3>
+              <form class="contact-form-container" action="#" method="POST">
+              
+                    <div class="form-attribute form-fname"> 
+                        <input class="form-input" type="date" id="fname" name="date" placeholder="Date">
+                    </div>
+                 
+                     <div class="form-attribute form-lname"> 
+                         <input class="form-input" type="text" id="lname" name="subject" placeholder="Subject">
+                     </div>
+                 
+             
+                 
+               
+                        
+                 <div class="form-attribute form-subject">
+                    <textarea rows="5" class="form-input-subject" id="subject" name="subject" placeholder="Content.." style="height:200px"></textarea></div>
+                    
+               <div class="form-submit"> 
+                   <input class="input-submit" type="submit"  value="Post" name="sendEmail" >
+                </div>
+         
+                
+                
+                
+               
+                
+               
+            </form>
+         
+    
+   
   </section>
-  <svg  class="new" id="SvgjsSvg1001"  xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
-    <defs id="SvgjsDefs1002"></defs>
-    <g id="SvgjsG1008">
-        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 50 50" viewBox="0 0 50 50" >
-            <circle cx="25" cy="25" r="25" fill="#00c3f0" class="color43b05c svgShape"></circle>
-            <line x1="25" x2="25" y1="13" y2="38" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
-            <line x1="37.5" x2="12.5" y1="25" y2="25" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" class="colorStrokefff svgStroke"></line>
-        </svg>
-    </g>
-</svg>
- </body>
+</body>
 </html>
