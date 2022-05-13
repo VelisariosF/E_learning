@@ -89,7 +89,7 @@
         </div>
 
         <ul class="menu-container">
-            <li class="menu-item"><a href="../../index.php">Home</a></li>
+        <li class="menu-item"><a href="../php/home.php">Home</a></li>
             <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
             <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
             <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
@@ -109,7 +109,7 @@
     <section class="insert-announcement-page">
 
         <h3 class="title">Post new assignment</h3>
-        <form class="contact-form-container" action="#" method="POST">
+        <form class="contact-form-container" action="assignments.php" method="POST">
 
             <div class="form-attribute form-fname">
                 <input class="form-input" type="text" id="fname" name="goals" placeholder="Goals">

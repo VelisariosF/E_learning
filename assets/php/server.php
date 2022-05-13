@@ -48,7 +48,7 @@ if (isset($_POST['login_user'])) {
               $_SESSION['role'] = $row["role"];
               $_SESSION['loginame'] = $row["loginame"];
               //direct to the index.php
-              header('Location:index.php');
+              header('Location:home.php');
           }
     } else {
          //if they don't exist inside the database then show an error message
@@ -316,7 +316,7 @@ if (isset($_POST['insertUser'])) {
     $_POST['password'] = '';
 
    
-      header('Location: usersControl.php');
+      header('Location: home.php');
      
     }
     $db->close();
@@ -325,52 +325,7 @@ if (isset($_POST['insertUser'])) {
 
 
 //update user
-//check if the button from the updateUser.php form is pressed
-if (isset($_POST['updateUser'])) {
-  //get the id of the speceific user
-  $loginame =  $_SESSION['updateUserLoginame'];
-  //get the data from the form
-  $firstname = mysqli_real_escape_string($db, $_POST['firstname']);
-  $lastname = mysqli_real_escape_string($db, $_POST['lastname']);
-  $role = mysqli_real_escape_string($db, $_POST['role']);
-  $password = mysqli_real_escape_string($db, $_POST['password']);
-  
-  if (empty($firstname)) {
-    array_push($errors, "Απαιτείται εισαγωγή oνόματος.");
-  
-  }
-  if (empty($lastname)) {
-  	array_push($errors, "Απαιτείται εισαγωγή επιθέτου.");
-  }
 
-  if (empty($role)) {
-  	array_push($errors, "Απαιτείται εισαγωγή ρόλου.");
-  }else if($role!= 'Student' && $role!='Tutor'){
-    array_push($errors, "O ρόλος πρέπει να είναι Student ή Tutor.");
-  }
-
-  
-
-  if (empty($password)) {
-  	array_push($errors, "Απαιτείται εισαγωγή κωδικού.");
-  }
-   //if not empty update the user's data
-  if(count($errors) == 0){
-  $query = "UPDATE users SET firstname='$firstname', lastname='$lastname', role = '$role', password = '$password' WHERE loginame='$loginame'";
-   mysqli_query($db, $query);
-  
-    $_POST['firstname'] = '';
-    $_POST['lastname'] = '';
-    $_POST['role'] = '';
-    $_POST['password'] = '';
-    unset($_SESSION['updateUserLoginame']);
-      header('Location: usersControl.php');
-  
-   
-  
- }
- $db->close();
-}
 
 //================ Homework ===================\\
 //insert new homework

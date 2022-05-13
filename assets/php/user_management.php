@@ -1,3 +1,22 @@
+<?php
+ require('server.php'); 
+ //if the user is not logged in redirect to the login page
+ if (!isset($_SESSION['logged_in'])) {
+   $_SESSION['msg'] = "You must log in first";
+      header('location: Login.php');
+ }
+ //if is logggeout redirect the login page
+ if (isset($_GET['logout'])) {
+     session_destroy();
+     unset($_SESSION['loginame']);
+     header("location: Login.php");
+ }
+
+//get the data in order to show them to the screen
+$query = "SELECT * from users";
+$result = $db->query($query) or die(mysqli_error($db));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +103,7 @@
         </div>
 
         <ul class="menu-container">
-            <li class="menu-item"><a href="../../index.php">Home</a></li>
+        <li class="menu-item"><a href="../php/home.php">Home</a></li>
             <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
             <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
             <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
@@ -103,8 +122,35 @@
 
   <section class="user-management-page">
       <ul class="user-management-container">
-
-        <div class="row">
+      <?php 
+                if ($result && $result->num_rows > 0) {
+                    $i = 0;
+                       //parse the data and show them on screen
+                    while ($row = $result->fetch_assoc()) {
+                        $i++;   
+                        echo ' <div class="row">
+                        <li class="user-management-element">
+                        <h3 class="title"> ' . $row['firstname'] .'  '. $row['lastname'];
+                        //This time we don't have to check if the user is type tutor in order to show the delete and up
+                        // update options on screen because this page is accessed only by Tutor tyope users 
+                            echo '
+                        
+                   
+                    <a href="deleteUser.php?&loginame=' . $row['loginame'] . '" target="_self">Delete user</a>
+                   
+                         </h3>
+  
+                        </li>
+              
+                     
+                    </div>';
+                    
+                    }
+                    
+                }
+                ?>
+  
+      <!--  <div class="row">
 
             <li class="user-management-element">
                 <h3 class="title">
@@ -116,39 +162,10 @@
   
             </li>
   
-            <li class="user-management-element">
-                <h3 class="title">
-                    user name
+         
+        </div>-->
 
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-  
-            </li>
-        </div>
-
-        <div class="row">
-
-            <li class="user-management-element">
-                <h3 class="title">
-                    user name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-  
-            </li>
-  
-            <li class="user-management-element">
-                <h3 class="title">
-                    user name
-
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
-                </h3>
-  
-            </li>
-        </div>
+     
 
         
 

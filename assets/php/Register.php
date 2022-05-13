@@ -1,3 +1,6 @@
+<?php require('server.php') 
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,16 +21,16 @@
     <section class="register-page">
         <h1 class="title">Welcome, register to continue</h1>
 
-        <form class="register-form" action="/home.php" method="POST">
+        <form class="register-form" action="Register.php" method="POST">
             
-        <input class="user-input" type="email" placeholder="Firstname.." name="firstname" required />
+        <input class="user-input" type="text" placeholder="Firstname.." name="firstname" required />
 
-        <input class="user-input" type="email" placeholder="Lastname.." name="lastname" required />
+        <input class="user-input" type="text" placeholder="Lastname.." name="lastname" required />
 
          
             <input class="user-input" type="email" placeholder="email.." name="loginame" required />
 
-            <input class="user-input" type="email" placeholder="role.." name="role" required />
+            <input class="user-input" type="text" placeholder="role.." name="role" required />
 
             <input class="user-input" type="password" placeholder="password.." name="password" required />
 
@@ -35,7 +38,7 @@
             <input class="user-submit" type="submit" placeholder="register" name="insertUser" value="Register" />
         </form>
 
-        <a href="../../assets/php/Login.php">Already have an account!</a>
+        <a href="Login.php">Already have an account!</a>
     </section>
 </body>
 

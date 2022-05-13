@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/index/index.css">
+    <link rel="stylesheet" href="../../assets/css/index/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -98,21 +98,19 @@
             </svg>
 <h1><a href="#">E-Learning</a></h1>
         </div>
-
         <ul class="menu-container">
-            <li class="menu-item"><a href="./index.php">Home</a></li>
-            <li class="menu-item"><a href="assets/php/announcements.php">Announcements</a></li>
-            <li class="menu-item"><a href="assets/php/contact.php">Contact</a></li>
-            <li class="menu-item"><a href="assets/php/documents.php">Documents</a></li>
-            <li class="menu-item"><a href="assets/php/assignments.php">Assignments</a></li>
+        <li class="menu-item"><a href="../php/home.php">Home</a></li>
+            <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
+            <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
+            <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
+            <li class="menu-item"><a href="../php/assignments.php">Assignments</a></li>
             <?php
-     //if the user is type tutor show additional choices
-                if ($_SESSION['role'] == 'Tutor') {
-                    echo '<li class="menu-item"><a href="assets/php/user_management.php">User Management</a></li>';
-                }
-                ?>
-            
-            <li class="menu-item"><a href="assets/php/Login.php">Log out</a></li>
+            //if the user is type tutor show additional choices
+            if ($_SESSION['role'] == 'Tutor') {
+                echo '<li class="menu-item"><a href="../php/user_management.php">User Management</a></li>';
+            }
+            ?>
+            <li class="menu-item"><a href="../php/Login.php">Log out</a></li>
         </ul>
     </nav>
 

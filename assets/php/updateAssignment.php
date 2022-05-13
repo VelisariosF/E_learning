@@ -4,7 +4,7 @@ require('server.php');
  //if the user is not logged in redirect to the login page
 if (!isset($_SESSION['logged_in'])) {
   $_SESSION['msg'] = "You must log in first";
-     header('location: login.php');
+     header('location: Login.php');
 }
 
 ?>
@@ -25,7 +25,7 @@ if (!isset($_SESSION['logged_in'])) {
 <body>
     
 
-<?php include('errors.php');
+<?php 
 
 
 $_SESSION['updateHomId'] = $_GET['id'];
@@ -107,7 +107,7 @@ $_SESSION['updateHomId'] = $_GET['id'];
         </div>
 
         <ul class="menu-container">
-            <li class="menu-item"><a href="../../index.php">Home</a></li>
+        <li class="menu-item"><a href="../php/home.php">Home</a></li>
             <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
             <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
             <li class="menu-item"><a href="../php/documents.php">Documents</a></li>

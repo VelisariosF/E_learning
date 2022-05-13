@@ -19,7 +19,7 @@
  <section class="login-page">
    <h1 class="title">Welcome, login to continue</h1>
 
-   <form class="log-in-form" action="/home.php" method="POST">
+   <form class="log-in-form" action="Login.php" method="POST">
      
     <input class="user-input" type="email" placeholder="email.." name="loginame" required/>
      
@@ -29,7 +29,7 @@
      <input class="user-submit" type="submit" placeholder="Log in" name="login_user" value="Log In"/>
    </form>
 
-   <a href="../../assets/php/Register.php" >Don't have an account.</a>
+   <a href="Register.php" >Don't have an account.</a>
  </section>
 </body>
 </html>

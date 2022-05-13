@@ -4,14 +4,14 @@
 
   if (!isset($_SESSION['logged_in'])) {
     $_SESSION['msg'] = "You must log in first";
-   	header('location: login.php');
+   	header('location: Login.php');
   }
    //if is logggeout redirect the login page
 
   if (isset($_GET['logout'])) {
   	session_destroy();
   	unset($_SESSION['loginame']);
-  	header("location: login.php");
+  	header("location: Login.php");
   }
 ?>
 
@@ -101,7 +101,7 @@
         </div>
 
         <ul class="menu-container">
-            <li class="menu-item"><a href="../../index.php">Home</a></li>
+        <li class="menu-item"><a href="../php/home.php">Home</a></li>
             <li class="menu-item"><a href="../php/announcements.php">Announcements</a></li>
             <li class="menu-item"><a href="../php/contact.php">Contact</a></li>
             <li class="menu-item"><a href="../php/documents.php">Documents</a></li>
